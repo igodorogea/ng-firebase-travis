@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "8"
+  - "10"
 
 cache:
   directories:
@@ -12,7 +12,13 @@ install:
 script:
   - npm run build -- --prod
 
+before_deploy:
+  - pwd
+  - ls -al
+  - ls -al dist
+
 deploy:
   provider: firebase
+  skip_cleanup: true
   token:
     secure: "XnmvCc5V085hDd8irPquprEnlxjFnAsnbZorbKSKkWy24RcaAmYtsQF3fDyZ12CYXCZ31mNnbC9XJ0EMB4MNlmrc8AXmUpLqEUPV2zs6d7xwsyRb0qNM2qlx+48bqzG6VJGjqTnVOpLNnh3HFR7fQ2uW+T1KZ9mZ96D+KxQ3bbaNfqhrNEQpz0sdVkVySiK+oS+/BzpXi+OoxJ1EiXesUQVksHU88l4ZQ4s4REessPTZyhGTGp/EMCq4Zlw1FNgm4Mqrhw7UVrLqoIw3BVXUTmFmpkUnDzXo9rNgQRqqk2qGWM5WrTOr+FDXIG+AYAt2939qDRBC9LXpxhozYfSoeWxpZgHQKRhUXe2mB9f3e2T/QuK+PPh99lVpy9gNicz104ehf12jRCJ4/oYr2D1PBfC0aOna6+CqwElX1a6Q3xOF+VOyB/T3KmfcaLN5YZlQaIeDNcxypZSp0ge/bcpQooOHu6tA/Nj16nckIYFvdn3gPOLDB19NZ46IEPGKjnbON0sBXlh4qSHN0Rgf2zJzCUE1SlWk9v+ZeUVkInWZAY31zfIaDFW0I1rGD5LBxuDjFEKXvQSJ+JOwkM2DNQ7SBBJxkGIWx/oIKh/Mfaehn2cc5AE7CNRvENKhBbBsbpXmnSCN8SYrS149nxd0FZlF5jlkGv9CzZQvdcgtw479ge0="
