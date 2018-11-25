@@ -2,23 +2,21 @@ language: node_js
 node_js:
   - "10"
 
+branches:
+  only:
+    - master
+
 cache:
   directories:
      - ./node_modules
 
 install:
+  - npm install -g @angular/cli
+  - npm install -g firebase-tools
   - npm install
 
 script:
-  - npm run build -- --prod
+  - ng build --prod
 
-before_deploy:
-  - pwd
-  - ls -al
-  - ls -al dist
-
-deploy:
-  provider: firebase
-  skip_cleanup: true
-  token:
-    secure: "PNA7EHdIgkB5nKJKm/excEg2/z6brHG46sH4kqLuGGWc9iMwEQ5kRVyznOFd+lunR2UqUxhTOzzvNbCvNF9eUiNYoPldqp8DAP7CjmZuNcx10ne8wcEFVdK0CZUD1us8MrNPTtZ1SiQS06Kxz5SxD/KcPKhdzk9k8D2NXzpevK6G4btra88zl31p9icug96Wc2VgYPCJMmPDPx804RVVKQ+aXnU/h1pMqDbmb0Ef8PL5nELY26WdOu5rhfo4futSBpxrReNg6K5vnhUCMJ3dlBBU9lR3MOw5SQFLpR3niJb66a3U4nNCXRorzTVEpzuU2L4NyslSd6fITWB5qNhVTKp8ZcMiWmR2TKTGW22EYBAIAgUKoi+ZtJ9NDPthhxh2MAOvcCU76NqqUiXzBd7enkW7VN8i4YU06wNt4CRwXppUMXpx1GS/qltWtfh8Perrlsmrxf5vqive92n2sS9hjxVY0bC9JBIALE/9PNZ/wiKYiXg58BVmO45AFs2KUwlgw74s4USYq9LPTEGeIrWLpZ7VwFPfp9Dzx4z3LCYEXwbaCf8ScObX/6FniySHl5G/iWQxjXgZnYkh6msvn1koXu9oG9K7Nj2502UqaNwRC6ZrB4/D02MCXRHXa4RnKjnpuRD2AD6B7gglcho06egNnxE+XGw++GhfW4MAVUrgaEU="
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN --non-interactive
