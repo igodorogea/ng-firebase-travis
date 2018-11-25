@@ -15,8 +15,8 @@ install:
   - npm install -g firebase-tools
   - npm install
 
-script:
+before_script:
   - ng build --prod
 
-after_success:
+script:
   - firebase deploy --token $FIREBASE_TOKEN --non-interactive
