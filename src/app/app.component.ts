@@ -9,12 +9,15 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  navLinks: any[] = [
+    {path: 'products-list', label: 'Products list'},
+    {path: 'orders', label: 'Orders'}
+  ];
 
+  constructor(private breakpointObserver: BreakpointObserver) {}
 }
