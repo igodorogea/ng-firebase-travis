@@ -15,8 +15,8 @@ export class AppComponent {
     );
 
   navLinks: any[] = [
-    {path: 'products-list', label: 'Products list'},
-    {path: 'orders', label: 'Orders'}
+    { path: 'products-lists', label: 'Products lists' },
+    { path: 'orders', label: 'Orders' }
   ];
 
   constructor(private breakpointObserver: BreakpointObserver) {}

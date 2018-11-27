@@ -1,0 +1,23 @@
+<h2 class="mat-headline">Create new Products List</h2>
+
+<form class="cpl-form" [formGroup]="cplForm">
+  <mat-form-field>
+    <input matInput placeholder="Products list name" formControlName="name">
+  </mat-form-field>
+
+  <h3 class="mat-title">Products</h3>
+  <div class="cpl-form-products" formArrayName="products">
+    <div *ngFor="let product of products.controls; index as i" [formGroup]="product">
+      <mat-form-field>
+        <input matInput placeholder="Product name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Product price" formControlName="price">
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="addProduct()">Add product</button>
+  </div>
+
+  <button mat-raised-button color="warn" (click)="save()">Save</button>
+</form>
