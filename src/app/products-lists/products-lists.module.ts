@@ -1,20 +1,33 @@
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
 import { CommonModule } from '@angular/common';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatToolbarModule
+} from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsListsRoutingModule } from './products-lists-routing.module';
 import { ProductsListsComponent } from './products-lists.component';
-import { AngularFireModule } from '@angular/fire';
 import { firebaseConfig } from '../app.config';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { MatButtonModule, MatIconModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
 import { CreateProductsListComponent } from './components/create/create-products-list.component';
 import { CreateProductsListService } from './components/create/create-products-list.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { RemoveProductDialog } from './components/create/remove-product.dialog';
+import { PersistenceService } from './shared/persistence.service';
 
 @NgModule({
   declarations: [
     ProductsListsComponent,
-    CreateProductsListComponent
+    CreateProductsListComponent,
+    RemoveProductDialog
   ],
+  entryComponents: [RemoveProductDialog],
   imports: [
     CommonModule,
     ProductsListsRoutingModule,
@@ -25,8 +38,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatDialogModule
   ],
-  providers: [CreateProductsListService]
+  providers: [CreateProductsListService, PersistenceService]
 })
 export class ProductsListsModule {}

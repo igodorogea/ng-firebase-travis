@@ -1,7 +1,17 @@
-<div class="button-wrapper">
-  <button mat-raised-button color="primary" routerLink="new">Create products list</button>
-</div>
+<div class="container">
+  <div class="text-right my-4">
+    <a mat-raised-button color="primary" routerLink="new">Create products list</a>
+  </div>
 
-<mat-list role="list">
-  <mat-list-item role="listitem">Item 1</mat-list-item>
-</mat-list>
+  <mat-nav-list>
+    <ng-container *ngFor="let list of lists$ | async; first as isFirst">
+      <mat-divider *ngIf="!isFirst"></mat-divider>
+      <mat-list-item>
+        <a class="flex-spacer" [routerLink]="routerStates.detail(list.id)">{{list.name}}</a>
+        <a mat-icon-button color="primary" [routerLink]="routerStates.edit(list.id)">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </mat-list-item>
+    </ng-container>
+  </mat-nav-list>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable()
 export class CreateProductsListService {
@@ -10,9 +10,13 @@ export class CreateProductsListService {
     return <FormArray>form.get('products');
   }
 
+  getProductName(form: FormGroup, i: number) {
+    return form.get(`products.${i}.name`).value;
+  }
+
   getProductsListForm() {
     return this.fb.group({
-      name: [''],
+      name: ['', [Validators.required]],
       products: this.fb.array([
         this.buildProductFormGroup()
       ])
@@ -23,14 +27,18 @@ export class CreateProductsListService {
     (<FormArray>form.get('products')).push(this.buildProductFormGroup());
   }
 
+  removeProductFromForm(form: FormGroup, i: number) {
+    (<FormArray>form.get('products')).removeAt(i);
+  }
+
   saveProductsList(value) {
     return this.afs.collection('productsLists').add(value);
   }
 
   private buildProductFormGroup() {
     return this.fb.group({
-      name: [''],
-      price: [0]
+      name: ['', [Validators.required]],
+      price: ['', [Validators.required]]
     });
   }
 }
