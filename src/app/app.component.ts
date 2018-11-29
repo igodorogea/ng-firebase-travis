@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { appRouterStates } from './shared/app-router.states';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +7,11 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
-
-  navLinks: any[] = [
-    { path: 'products-lists', label: 'Products lists' },
-    { path: 'orders', label: 'Orders' }
+  navMenu = [
+    appRouterStates.home,
+    appRouterStates.menus,
+    appRouterStates.orders
   ];
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor() {}
 }

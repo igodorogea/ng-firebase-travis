@@ -2,25 +2,25 @@
   <div class="row">
     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
       <mat-card>
-        <mat-card-title>Create new Products List</mat-card-title>
+        <mat-card-title>Create new menu</mat-card-title>
 
-        <form class="cpl-form" [formGroup]="cplForm">
+        <form class="create-menu-form" [formGroup]="menuForm">
           <mat-form-field>
-            <input matInput placeholder="Products list name" formControlName="name">
-            <mat-error *ngIf="cplForm.get('name').invalid">Cmon, give dis list a name!</mat-error>
+            <input matInput placeholder="Menu name" formControlName="name">
+            <mat-error *ngIf="menuForm.get('name').invalid">Cmon, give dis menu a name!</mat-error>
           </mat-form-field>
 
-          <div class="cpl-form-products" formArrayName="products">
-            <div class="mat-subheading-1 my-3">Products</div>
+          <div class="cmf-items" formArrayName="items">
+            <div class="mat-subheading-1 my-3">Menu items</div>
             <mat-accordion [multi]="true">
               <mat-expansion-panel
                 [expanded]="true"
-                *ngFor="let product of products.controls; index as i;"
-                [formGroup]="product">
+                *ngFor="let item of getMenuItems().controls; index as i;"
+                [formGroup]="item">
                 <mat-expansion-panel-header>
-                  <mat-panel-title>{{getProductHeader(i)}}</mat-panel-title>
+                  <mat-panel-title>{{getMenuItemTitle(i)}}</mat-panel-title>
                   <mat-panel-description>
-                    <button mat-icon-button (click)="deleteProduct($event,i)">
+                    <button mat-icon-button (click)="removeItem($event,i)">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </mat-panel-description>
@@ -36,7 +36,7 @@
               </mat-expansion-panel>
             </mat-accordion>
             <div class="mt-2">
-              <button mat-button (click)="addProduct()">Add product</button>
+              <button mat-button (click)="addMenuItem()">Add product</button>
             </div>
           </div>
 
@@ -46,7 +46,7 @@
         </form>
       </mat-card>
 
-      <pre>{{cplForm.status | json}}</pre>
+      <pre>{{menuForm.status | json}}</pre>
     </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-remove-product-dialog',
+  selector: 'app-remove-menu-item-dialog',
   template: `
     <h2 mat-dialog-title>You're sure about that?</h2>
     <mat-dialog-actions align="end">
@@ -10,4 +10,4 @@ import { Component } from '@angular/core';
     </mat-dialog-actions>
   `
 })
-export class RemoveProductDialog {}
+export class RemoveMenuItemDialog {}

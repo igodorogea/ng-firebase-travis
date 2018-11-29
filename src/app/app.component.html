@@ -1,12 +1,14 @@
 <mat-toolbar color="primary">
-  <nav>
-    <a *ngFor="let link of navLinks"
-      [routerLink]="link.path"
-      routerLinkActive="active"
-      mat-button>
-      {{link.label}}
-    </a>
-  </nav>
+  <div class="container">
+    <nav>
+      <a *ngFor="let state of navMenu"
+        [routerLink]="state.path"
+        routerLinkActive="active"
+        mat-button>
+        {{state.title}}
+      </a>
+    </nav>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

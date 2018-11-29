@@ -1,4 +1,4 @@
-export const routerStates = {
+export const menuRouterStates = {
   list: '',
   create: 'new',
   edit: id => `edit/${id}`,

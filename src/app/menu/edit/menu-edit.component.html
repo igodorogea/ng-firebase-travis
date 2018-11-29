@@ -1,0 +1,7 @@
+<app-container size="medium">
+  <h2 class="mat-headline">Edit menu</h2>
+  <app-menu-form
+    [menu$]="menu$"
+    (formSubmit)="update($event)"
+    *ngIf="menu$ | async"></app-menu-form>
+</app-container>
