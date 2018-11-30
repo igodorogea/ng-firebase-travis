@@ -6,7 +6,7 @@ import { MenuEditComponent } from './edit/menu-edit.component';
 import { menuRoutesNames } from './menu.routes.names';
 
 export const MENU_ROUTES: Routes = [
-  { path: '', redirectTo: menuRoutesNames.LIST, pathMatch: 'prefix' },
+  { path: '', redirectTo: menuRoutesNames.LIST, pathMatch: 'full' },
   { path: menuRoutesNames.LIST, component: MenuListComponent },
   { path: menuRoutesNames.CREATE, component: MenuCreateComponent },
   { path: menuRoutesNames.DETAIL + '/:id', component: MenuDetailComponent },
