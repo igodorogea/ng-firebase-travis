@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { firebaseConfig } from './shared/app.config';
 import { SharedModule } from './shared/shared.module';
+import { MenuModule } from './menu/menu.module';
+
+import { AppComponent } from './app.component';
+import { firebaseConfig } from './shared/app.config';
+import { APP_ROUTES } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -17,10 +19,11 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    RouterModule.forRoot(APP_ROUTES),
     SharedModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

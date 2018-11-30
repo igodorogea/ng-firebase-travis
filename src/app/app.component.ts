@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { appRouterStates } from './shared/app-router.states';
+import { appRoutesNames } from './app.routes.names';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,8 @@ import { appRouterStates } from './shared/app-router.states';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  navMenu = [
-    appRouterStates.home,
-    appRouterStates.menus,
-    appRouterStates.orders
-  ];
+  menuLink = './' + appRoutesNames.MENU;
+  orderLink = './' + appRoutesNames.ORDER;
 
   constructor() {}
 }

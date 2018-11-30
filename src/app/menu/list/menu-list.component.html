@@ -4,7 +4,7 @@
       <h2 class="mat-headline mb-0">Menu list</h2>
     </div>
     <div class="col-auto text-right">
-      <a mat-raised-button color="primary" routerLink="new">Create menu</a>
+      <a mat-raised-button color="primary" [routerLink]="menuCreateLink">Create menu</a>
     </div>
   </div>
 
@@ -12,8 +12,8 @@
     <ng-container *ngFor="let menu of menus; first as isFirst">
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
-        <a class="flex-spacer" [routerLink]="routerStates.detail(menu.id)">{{menu.name}}</a>
-        <a mat-icon-button color="primary" [routerLink]="routerStates.edit(menu.id)">
+        <a class="flex-spacer" [routerLink]="[menuDetailLink, menu.id]">{{menu.name}}</a>
+        <a mat-icon-button color="primary" [routerLink]="[menuEditLink, menu.id]">
           <mat-icon>edit</mat-icon>
         </a>
       </mat-list-item>

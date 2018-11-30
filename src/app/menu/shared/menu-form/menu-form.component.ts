@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PersistenceService } from '../persistence.service';
 import { MatDialog } from '@angular/material';
-import { RemoveMenuItemDialog } from '../../create/remove-menu-item.dialog';
+import { RemoveMenuItemDialog } from '../remove-menu-item.dialog';
 import { Observable } from 'rxjs';
 import { Menu } from '../menu.interfaces';
 import { AutoUnsubscribe } from '../../../shared/auto-unsubscribe';

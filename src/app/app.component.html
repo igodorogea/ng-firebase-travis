@@ -1,11 +1,15 @@
 <mat-toolbar color="primary">
   <div class="container">
     <nav>
-      <a *ngFor="let state of navMenu"
-        [routerLink]="state.path"
+      <a [routerLink]="menuLink"
         routerLinkActive="active"
         mat-button>
-        {{state.title}}
+        Menus
+      </a>
+      <a [routerLink]="orderLink"
+        routerLinkActive="active"
+        mat-button>
+        Orders
       </a>
     </nav>
   </div>

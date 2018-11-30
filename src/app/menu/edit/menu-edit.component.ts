@@ -6,12 +6,11 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Menu } from '../shared/menu.interfaces';
 import { switchMap } from 'rxjs/operators';
-import { menuRouterStates } from '../shared/menu-router.states';
+import { menuRoutesNames } from '../menu.routes.names';
 
 @Component({
   selector: 'app-menu-edit',
-  templateUrl: './menu-edit.component.html',
-  styleUrls: ['./menu-edit.component.scss']
+  templateUrl: './menu-edit.component.html'
 })
 export class MenuEditComponent {
   menu$: Observable<Menu>;
@@ -28,12 +27,8 @@ export class MenuEditComponent {
     );
   }
 
-  log(ref) {
-    console.log(ref);
-  }
-
   async update(menu) {
     await this.dbService.updateMenu(menu);
-    await this.router.navigate([menuRouterStates.list]);
+    await this.router.navigate(['../../' + menuRoutesNames.LIST], { relativeTo: this.route });
   }
 }
