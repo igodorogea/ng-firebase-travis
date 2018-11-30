@@ -1,11 +1,12 @@
+import { MatDialog } from '@angular/material';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PersistenceService } from '../persistence.service';
-import { MatDialog } from '@angular/material';
-import { RemoveMenuItemDialog } from '../remove-menu-item.dialog';
 import { Observable } from 'rxjs';
-import { Menu } from '../menu.interfaces';
+
+import { PersistenceService } from '../persistence.service';
+import { RemoveMenuItemDialog } from '../remove-menu-item.dialog';
 import { AutoUnsubscribe } from '../../../shared/auto-unsubscribe';
+import { Menu } from '../menu.interfaces';
 
 @Component({
   selector: 'app-menu-form',
@@ -26,9 +27,11 @@ export class MenuFormComponent extends AutoUnsubscribe implements OnInit {
   }
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.menu$.subscribe(menu => this.patchForm(menu))
-    );
+    if (this.menu$) {
+      this.subscriptions.push(
+        this.menu$.subscribe(menu => this.patchForm(menu))
+      );
+    }
   }
 
   getMenuItems(): FormArray {

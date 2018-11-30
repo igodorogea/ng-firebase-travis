@@ -2,6 +2,10 @@
   <h2 class="mat-headline">Edit menu</h2>
   <app-menu-form
     [menu$]="menu$"
-    (formSubmit)="update($event)"
-    *ngIf="menu$ | async"></app-menu-form>
+    (formSubmit)="update($event)">
+    <!-- Projected content -->
+    <div class="text-right">
+      <button type="submit" mat-raised-button color="primary">Update</button>
+    </div>
+  </app-menu-form>
 </app-container>
