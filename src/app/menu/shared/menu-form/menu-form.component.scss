@@ -1,25 +1,38 @@
-:host /deep/ {
-  .mat-form-field {
-    width: 100%;
-  }
+@import '~@angular/material/theming';
 
-  .mat-expansion-panel-header-title {
-    align-items: center;
-  }
-  .mat-expansion-panel-header-description {
-    flex-grow: unset;
-    align-content: end;
-  }
+.mat-form-field {
+  width: 100%;
+}
 
-  .mat-expansion-panel-header.mat-expanded {
-    background-color: rgba(0, 0, 0, 0.03);
-    &:focus,
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.04);
-    }
-  }
+.mat-expansion-panel-header {
+  padding-right: 12px;
+}
 
-  .mat-expansion-panel-content {
-    font-size: 16px;
+.mat-expansion-panel-header-title {
+  align-items: center;
+}
+
+.mat-expansion-panel-header-description {
+  flex-grow: unset;
+  align-content: end;
+  margin-right: 0;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  background-color: rgba(0, 0, 0, 0.03);
+
+  &:focus,
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.menu-item-form-group {
+  font-size: 16px;
+}
+
+.menu-item-remove-btn {
+  &:hover {
+    color: mat-color(mat-palette($mat-red), darker);
   }
 }

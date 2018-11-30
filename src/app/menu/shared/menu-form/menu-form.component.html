@@ -8,18 +8,19 @@
     <div class="mat-subheading-1 my-3">Menu items</div>
     <mat-accordion [multi]="true">
       <mat-expansion-panel
+        [hideToggle]="true"
         [expanded]="true"
         *ngFor="let item of getMenuItems().controls; index as i;"
         [formGroup]="item">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header collapsedHeight="44px" expandedHeight="44px">
           <mat-panel-title>{{getMenuItemTitle(i)}}</mat-panel-title>
           <mat-panel-description>
-            <button mat-icon-button (click)="removeItem($event,i)">
+            <button class="menu-item-remove-btn" mat-icon-button (click)="removeItem($event,i)">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <div class="my-3">
+        <div class="menu-item-form-group mt-3">
           <mat-form-field>
             <input matInput placeholder="Product name" formControlName="name">
           </mat-form-field>
