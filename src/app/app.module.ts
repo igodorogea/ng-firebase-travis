@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from './shared/shared.module';
 import { MenuModule } from './menu/menu.module';
+import { OrderModule } from './order/order.module';
 
 import { AppComponent } from './app.component';
 import { firebaseConfig } from './shared/app.config';
@@ -23,7 +24,8 @@ import { APP_ROUTES } from './app.routes';
     SharedModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    MenuModule
+    MenuModule,
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
