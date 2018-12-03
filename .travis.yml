@@ -6,13 +6,12 @@ branches:
   only:
     - master
 
-cache:
-  directories:
-    - ./node_modules
-    - "$HOME/.npm"
+cache: npm
+
+before_install:
+  - npm install -g firebase-tools
 
 install:
-  - npm install -g firebase-tools
   - npm ci
 
 before_script:
