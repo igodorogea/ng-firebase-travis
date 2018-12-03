@@ -19,7 +19,7 @@ before_script:
   - ng build --prod --vendor-chunk=true
 
 script:
-  - firebase deploy --token $FIREBASE_TOKEN --non-interactive
+  - firebase deploy --token $FIREBASE_TOKEN --non-interactive --project $FIREBASE_PROJECT_ID
 
 notifications:
   email:
