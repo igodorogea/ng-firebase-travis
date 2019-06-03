@@ -6,8 +6,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from './shared/shared.module';
-import { MenuModule } from './menu/menu.module';
+import { ShipmentModule } from './shipment/shipment.module';
 import { OrderModule } from './order/order.module';
+import { FireCrudModule } from './shared/fire-crud/fire-crud.module';
 
 import { AppComponent } from './app.component';
 import { firebaseConfig } from './shared/app.config';
@@ -24,8 +25,9 @@ import { APP_ROUTES } from './app.routes';
     SharedModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    MenuModule,
-    OrderModule
+    FireCrudModule,
+    ShipmentModule,
+    OrderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,7 +5,7 @@ import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 import { menuRoutesNames } from '../menu.routes.names';
 
 @Component({
-  selector: 'app-product-list',
+  selector: 'app-menu-list',
   templateUrl: './menu-list.component.html'
 })
 export class MenuListComponent extends AutoUnsubscribe {

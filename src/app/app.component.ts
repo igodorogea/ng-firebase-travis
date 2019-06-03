@@ -7,7 +7,7 @@ import { appRoutesNames } from './app.routes.names';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  menuLink = './' + appRoutesNames.MENU;
+  shipmentLink = './' + appRoutesNames.SHIPMENT;
   orderLink = './' + appRoutesNames.ORDER;
 
   constructor() {}

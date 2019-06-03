@@ -5,7 +5,7 @@ import { Menu } from '../shared/menu.interfaces';
 import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 
 @Component({
-  selector: 'app-detail',
+  selector: 'app-menu-detail',
   templateUrl: './menu-detail.component.html'
 })
 export class MenuDetailComponent extends AutoUnsubscribe {

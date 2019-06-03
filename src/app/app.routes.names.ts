@@ -1,4 +1,4 @@
 export const appRoutesNames = {
-  MENU: 'menu',
+  SHIPMENT: 'shipment',
   ORDER: 'order'
 };

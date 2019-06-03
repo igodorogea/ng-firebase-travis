@@ -1,0 +1,22 @@
+<app-container size="medium">
+  <div class="row align-items-center mb-4 px-3">
+    <div class="col">
+      <h2 class="mat-headline mb-0">Products list</h2>
+    </div>
+    <div class="col-auto text-right">
+      <a mat-raised-button color="primary" [routerLink]="routes.CREATE">Create product</a>
+    </div>
+  </div>
+
+  <mat-nav-list>
+    <ng-container *ngFor="let product of (products$ | async); first as isFirst">
+      <mat-divider *ngIf="!isFirst"></mat-divider>
+      <mat-list-item>
+        <a class="flex-spacer" [routerLink]="[routes.DETAIL, product.id]">{{product.name}}</a>
+        <a mat-icon-button color="primary" [routerLink]="[routes.EDIT, product.id]">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </mat-list-item>
+    </ng-container>
+  </mat-nav-list>
+</app-container>
