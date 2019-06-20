@@ -2,11 +2,23 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-container',
-  templateUrl: './container.component.html',
-  styleUrls: ['./container.component.scss']
+  template: `
+    <div [class]="containerClass">
+      <div class="row">
+        <div [class]="classNames">
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  `
 })
 export class ContainerComponent {
-  @Input() size;
+  @Input() size: 'large' | 'medium' | 'small' | 'extra-small';
+  @Input() class: string;
+
+  get containerClass() {
+    return 'container' + (this.class ? ' ' + this.class : '');
+  }
 
   get classNames() {
     switch (this.size) {

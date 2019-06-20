@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from '../../shared/models/product';
 import { FormBuilder, Validators } from '@angular/forms';
-import { buildCrudRoutes } from '../product.util';
+import { buildCrudRoutes } from '../../shared/routes.util';
+import { appRoutes } from '../../shared/routes.config';
 
 @Component({
   selector: 'app-menu-create',
@@ -17,7 +18,7 @@ export class ProductEditComponent {
     description: [''],
     price: [0, [Validators.required]],
   });
-  routes = buildCrudRoutes(this.router, this.route);
+  routes = appRoutes;
 
   constructor(
     private readonly afs: AngularFirestore,
@@ -32,7 +33,7 @@ export class ProductEditComponent {
     if (this.productForm.valid) {
       const product = this.productForm.value;
       await this.product.update(product);
-      await this.router.navigate([this.routes.LIST]);
+      await this.router.navigate([this.routes.product.LIST]);
     }
   }
 }

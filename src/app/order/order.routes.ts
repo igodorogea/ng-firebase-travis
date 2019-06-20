@@ -1,8 +1,13 @@
 import { Routes } from '@angular/router';
-import { orderRoutesNames } from './order.routes.names';
-import { OrderListComponent } from './list/order-list.component';
+import { CREATE, DETAIL, EDIT, LIST } from '../shared/routes.util';
+import { OrdersListComponent } from './list/orders-list.component';
+import { OrderCreateComponent } from './create/order-create.component';
+import { OrderDetailComponent } from './detail/order-detail.component';
+import { OrderEditComponent } from './edit/order-edit.component';
 
-export const ORDER_ROUTES: Routes = [
-  { path: '', redirectTo: orderRoutesNames.LIST, pathMatch: 'full' },
-  { path: orderRoutesNames.LIST, component: OrderListComponent }
+export const ORDER_ROUTES_CONFIG: Routes = [
+  { path: LIST, component: OrdersListComponent },
+  { path: `${CREATE}/:shipmentId`, component: OrderCreateComponent },
+  { path: `${DETAIL}/:id`, component: OrderDetailComponent },
+  { path: `${EDIT}/:id`, component: OrderEditComponent },
 ];

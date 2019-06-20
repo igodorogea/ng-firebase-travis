@@ -1,0 +1,22 @@
+<app-container size="medium">
+  <div class="row align-items-center mb-4">
+    <div class="col">
+      <h2 class="mat-headline mb-0">Shipments list</h2>
+    </div>
+    <div class="col-auto text-right">
+      <a mat-raised-button color="primary" [routerLink]="routes.shipment.CREATE">Create shipment</a>
+    </div>
+  </div>
+  <mat-nav-list>
+    <ng-container *ngFor="let shipment of (shipments$ | async); first as isFirst">
+      <mat-divider *ngIf="!isFirst"></mat-divider>
+      <mat-list-item>
+        <a class="flex-spacer"
+          [routerLink]="[routes.shipment.DETAIL, shipment.id]">{{shipment.date.toDate() | date}}</a>
+        <a mat-icon-button color="primary" [routerLink]="[routes.shipment.EDIT, shipment.id]">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </mat-list-item>
+    </ng-container>
+  </mat-nav-list>
+</app-container>

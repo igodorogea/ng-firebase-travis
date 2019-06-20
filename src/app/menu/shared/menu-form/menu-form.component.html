@@ -3,7 +3,6 @@
     <input matInput placeholder="Menu name" formControlName="name">
     <mat-error *ngIf="menuForm.get('name').invalid">Cmon, give dis menu a name!</mat-error>
   </mat-form-field>
-
   <div class="cmf-items" formArrayName="items">
     <div class="mat-subheading-1 my-3">Menu items</div>
     <mat-accordion [multi]="true">
@@ -34,7 +33,6 @@
       <button mat-button (click)="addMenuItem()">Add product</button>
     </div>
   </div>
-
   <ng-content></ng-content>
 </form>
 <pre>{{menuForm.status | json}}</pre>

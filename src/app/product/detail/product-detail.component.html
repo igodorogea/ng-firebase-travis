@@ -1,7 +1,6 @@
 <app-container size="medium" *ngIf="(product$ | async) as product">
   <h3 class="mat-headline">{{product.name}}</h3>
-
   <p>{{product.description}}</p>
-  <p>{{product.price}}</p>
-  <a [routerLink]="routes.LIST">Back</a>
+  <p>{{product.price | currency:'MDL':'symbol':'1.2-2'}}</p>
+  <a [routerLink]="routes.product.LIST">Back</a>
 </app-container>

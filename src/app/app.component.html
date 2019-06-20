@@ -1,1 +1,29 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <div class="w-100">
+    <app-container size="medium">
+      <div class="d-flex align-items-center">
+        <a mat-button class="ml-n3" routerLink="/">
+          <img src="assets/logo-8.png" class="mr-1" style="height: 44px; border-radius: 50%" alt="">
+          Nuts
+        </a>
+        <nav class="ml-3">
+          <a mat-button routerLink="/shipment" routerLinkActive="active">
+            Shipments
+          </a>
+          <a mat-button routerLink="/order" routerLinkActive="active">
+            Orders
+          </a>
+          <a mat-button routerLink="/product" routerLinkActive="active">
+            Products
+          </a>
+        </nav>
+        <div class="flex-grow-1"></div>
+        <app-auth></app-auth>
+      </div>
+    </app-container>
+  </div>
+</mat-toolbar>
+
+<div class="mt-4 mb-3">
+  <router-outlet></router-outlet>
+</div>

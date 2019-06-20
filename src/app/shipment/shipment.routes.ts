@@ -1,8 +1,8 @@
-import { Routes } from '@angular/router';
-import { shipmentRoutesNames } from './shipment.routes.names';
-import { ShipmentListComponent } from './list/shipment-list.component';
+import { CREATE, DETAIL, EDIT } from '../shared/routes.util';
 
-export const SHIPMENT_ROUTES: Routes = [
-  { path: '', redirectTo: shipmentRoutesNames.LIST, pathMatch: 'full' },
-  { path: shipmentRoutesNames.LIST, component: ShipmentListComponent },
-];
+export const shipmentRoutes = path => ({
+  LIST: path,
+  DETAIL: `${path}/${DETAIL}`,
+  CREATE: `${path}/${CREATE}`,
+  EDIT: `${path}/${EDIT}`
+});

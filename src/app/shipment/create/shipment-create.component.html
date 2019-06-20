@@ -1,0 +1,19 @@
+<app-container size="medium">
+  <h2 class="mat-headline">Create new shipment</h2>
+  <form class="shipment-form" [formGroup]="shipmentForm" (submit)="create()">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Shipment date" formControlName="date">
+      <mat-error *ngIf="shipmentForm.get('date').invalid">Cmon, give dis shipment a date!</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Shipment description" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <div class="d-flex align-items-center">
+      <button type="submit" mat-raised-button color="warn">Create</button>
+      <a class="ml-3" routerLink="../">Cancel</a>
+    </div>
+  </form>
+</app-container>

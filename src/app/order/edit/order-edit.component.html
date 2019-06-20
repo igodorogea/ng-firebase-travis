@@ -1,0 +1,12 @@
+<app-container size="medium">
+  <h2 class="mat-headline">Edit order</h2>
+  <app-order-form
+    [order$]="order$"
+    (formSubmit)="update($event)">
+    <!-- Projected content -->
+    <div>
+      <button type="submit" mat-raised-button color="primary">Update</button>
+      <button type="button" class="ml-3" mat-button (click)="location.back()">Cancel</button>
+    </div>
+  </app-order-form>
+</app-container>

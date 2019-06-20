@@ -95,6 +95,6 @@ export class MenuFormComponent extends AutoUnsubscribe implements OnInit {
         this.getMenuItems().removeAt(this.getMenuItems().length - 1);
       }
     }
-    this.menuForm.patchValue(<any>menu);
+    this.menuForm.patchValue(menu);
   }
 }

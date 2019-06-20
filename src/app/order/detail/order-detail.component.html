@@ -1,0 +1,27 @@
+<app-container size="medium" *ngIf="(order$ | async) as order">
+  <div class="row align-items-center mb-4">
+    <div class="col">
+      <h2 class="mat-headline mb-0">Order details</h2>
+    </div>
+    <div class="col-auto text-right">
+      <a mat-button [routerLink]="routes.order.LIST">Back to list</a>
+      <a mat-raised-button color="primary" class="ml-2" [routerLink]="[routes.order.EDIT, order.id]">Edit</a>
+      <a mat-raised-button color="warn" class="ml-2" (click)="removeOrder()">Remove</a>
+    </div>
+  </div>
+  <mat-list>
+    <ng-container *ngFor="let orderLine of order.orderLines; first as isFirst">
+      <mat-divider *ngIf="!isFirst"></mat-divider>
+      <mat-list-item>
+        <div class="flex-spacer">{{orderLine.productName}}</div>
+        <div>{{orderLine.qty}}</div>
+        <div style="width: 100px; text-align:right;">{{orderLine.price | currency:'MDL':'symbol':'1.2-2'}}</div>
+      </mat-list-item>
+    </ng-container>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <div class="flex-spacer"><b>Total:</b></div>
+      <div style="text-align:right;">{{getOrderTotal(order) | currency:'MDL':'symbol':'1.2-2'}}</div>
+    </mat-list-item>
+  </mat-list>
+</app-container>

@@ -5,7 +5,7 @@ import { Product } from '../../shared/models/product';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-menu-create',
+  selector: 'app-product-create',
   templateUrl: './product-create.component.html'
 })
 export class ProductCreateComponent {
