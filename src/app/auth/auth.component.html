@@ -1,11 +1,14 @@
-<ng-container *ngIf="(user$ | async) as user; else login">
-  <button mat-button (click)="signOut()">
-    <img [src]="user.photoURL" class="mr-1" style="height: 32px; border-radius: 50%" alt="">
-    Sign out
-  </button>
+<ng-container *ngIf="(auth.user$ | async) as user; else login">
+  <img
+    *ngIf="user.photoURL"
+    [src]="user.photoURL"
+    class="user-photo"
+    alt=""
+  />
+  <button mat-flat-button (click)="signOut()">Sign out</button>
 </ng-container>
 <ng-template #login>
-  <ng-container *ngIf="!(isFetching$ | async)">
+  <ng-container *ngIf="!(auth.isFetching$ | async)">
     <button mat-button (click)="signIn()">
       <mat-icon class="mr-1">exit_to_app</mat-icon>
       Sign in

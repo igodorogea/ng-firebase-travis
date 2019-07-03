@@ -15,6 +15,8 @@ import { ShipmentModule } from './shipment/shipment.module';
 import { OrderModule } from './order/order.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthComponent } from './auth/auth.component';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { UsersModule } from './users/users.module';
 
 registerLocaleData(localeMd);
 
@@ -31,9 +33,11 @@ registerLocaleData(localeMd);
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireFunctionsModule,
     ProductModule,
     ShipmentModule,
     OrderModule,
+    UsersModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ro-MD' },

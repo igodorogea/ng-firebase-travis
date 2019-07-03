@@ -1,8 +1,34 @@
+rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read;
-      allow write: if request.auth.uid != null;
+    match /shipments/{document=**} {
+      // all can view
+      allow read: if true;
+      // only admins can create and edit
+      allow write: if request.auth.token.admin == true;
+    }
+
+    match /products/{document=**} {
+      // all can view
+      allow read: if true;
+      // only admins can create and edit
+      allow write: if request.auth.token.admin == true;
+    }
+
+    match /orders/{order} {
+      // only admin and owner can view
+      allow read, update: if request.auth.token.admin == true || request.auth.uid == resource.data.userId;
+      // only admin and owner can create and update
+      allow create: if request.auth.token.admin == true || request.auth.uid == request.resource.data.userId;
+    }
+
+    match /users/{userId} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == userId || request.auth.token.admin == true;
+    }
+
+    match /admins/{userId} {
+      allow read, write: if request.auth.token.admin == true;
     }
   }
 }

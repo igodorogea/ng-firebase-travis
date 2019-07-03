@@ -12,7 +12,7 @@
     <ng-container *ngFor="let product of (products$ | async); first as isFirst">
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
-        <a class="flex-spacer" [routerLink]="[routes.product.DETAIL, product.id]">{{product.name}}</a>
+        <a class="flex-grow-1" [routerLink]="[routes.product.DETAIL, product.id]">{{product.name}}</a>
         <span>{{product.price | currency:'MDL':'symbol':'1.2-2'}}</span>
         <a mat-icon-button color="primary" [routerLink]="[routes.product.EDIT, product.id]">
           <mat-icon>edit</mat-icon>

@@ -3,7 +3,8 @@ import { shipmentRoutes } from './shipment/shipment.routes';
 export const ENTRY_POINTS = {
   shipment: 'shipment',
   order: 'order',
-  product: 'product'
+  product: 'product',
+  users: 'users'
 };
 
 export const appRoutes = {

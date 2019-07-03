@@ -12,7 +12,7 @@
     <ng-container *ngFor="let menu of menus; first as isFirst">
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
-        <a class="flex-spacer" [routerLink]="[menuDetailLink, menu.id]">{{menu.name}}</a>
+        <a class="flex-grow-1" [routerLink]="[menuDetailLink, menu.id]">{{menu.name}}</a>
         <a mat-icon-button color="primary" [routerLink]="[menuEditLink, menu.id]">
           <mat-icon>edit</mat-icon>
         </a>

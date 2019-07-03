@@ -13,14 +13,14 @@
     <ng-container *ngFor="let orderLine of order.orderLines; first as isFirst">
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
-        <div class="flex-spacer">{{orderLine.productName}}</div>
+        <div class="flex-grow-1">{{orderLine.productName}}</div>
         <div>{{orderLine.qty}}</div>
         <div style="width: 100px; text-align:right;">{{orderLine.price | currency:'MDL':'symbol':'1.2-2'}}</div>
       </mat-list-item>
     </ng-container>
     <mat-divider></mat-divider>
     <mat-list-item>
-      <div class="flex-spacer"><b>Total:</b></div>
+      <div class="flex-grow-1"><b>Total:</b></div>
       <div style="text-align:right;">{{getOrderTotal(order) | currency:'MDL':'symbol':'1.2-2'}}</div>
     </mat-list-item>
   </mat-list>

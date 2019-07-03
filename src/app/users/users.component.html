@@ -1,0 +1,20 @@
+<app-container size="medium">
+  <h2 class="mat-headline mb-4">Users list</h2>
+  <ng-container *ngIf="(admins$ | async) as admins">
+    <mat-list *ngIf="(users$ | async) as users">
+      <mat-list-item>
+        <div class="flex-grow-1 text-right">Is admin</div>
+      </mat-list-item>
+      <ng-container *ngFor="let user of users">
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <img matListAvatar [src]="user.photoURL" alt="">
+          <div matLine>{{user.displayName}}</div>
+          <mat-slide-toggle
+            (change)="toggleAdminRole($event, user.uid)"
+            [checked]="admins.includes(user.uid)"></mat-slide-toggle>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+  </ng-container>
+</app-container>

@@ -1,38 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from './user.model';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user$: Observable<User>;
+  isFetching$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  user$: Observable<User> = this.afAuth.user.pipe(
+    switchMap((user) => this.afAuth.idTokenResult.pipe(
+      map((idTokenResult) => {
+        this.isFetching$.next(false);
+        return user && idTokenResult ? { ...user, claims: idTokenResult.claims as any } : null;
+      })
+    ))
+  );
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
-  ) {
-    this.user$ = this.afAuth.user;
-    // this.user$ = this.afAuth.authState.pipe(
-    //   switchMap(user => {
-    //     if (user) {
-    //       return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-    //     } else {
-    //       return of(null);
-    //     }
-    //   })
-    // );
-  }
+  ) {}
 
   async googleSignIn() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
-    console.log(credential);
-    // return this.updateUserData(credential.user);
+    if (credential.additionalUserInfo.isNewUser) {
+      this.updateUserData(credential.user);
+    }
   }
 
   private updateUserData(user) {
@@ -43,7 +41,7 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL
     };
-    return userRef.set(data, { merge: true });
+    userRef.set(data, { merge: true });
   }
 
   async signOut() {

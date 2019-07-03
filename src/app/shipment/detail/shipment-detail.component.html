@@ -15,7 +15,7 @@
     <ng-container *ngFor="let order of (orders$ | async); first as isFirst">
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
-        <a class="flex-spacer" [routerLink]="[routes.order.DETAIL, order.id]">
+        <a class="flex-grow-1" [routerLink]="[routes.order.DETAIL, order.id]">
           {{getOrderTotal(order, products) | currency:'MDL':'symbol':'1.2-2'}}
         </a>
       </mat-list-item>

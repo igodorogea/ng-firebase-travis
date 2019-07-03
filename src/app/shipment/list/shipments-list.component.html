@@ -11,7 +11,7 @@
     <ng-container *ngFor="let shipment of (shipments$ | async); first as isFirst">
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
-        <a class="flex-spacer"
+        <a class="flex-grow-1"
           [routerLink]="[routes.shipment.DETAIL, shipment.id]">{{shipment.date.toDate() | date}}</a>
         <a mat-icon-button color="primary" [routerLink]="[routes.shipment.EDIT, shipment.id]">
           <mat-icon>edit</mat-icon>

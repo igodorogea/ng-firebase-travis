@@ -11,6 +11,5 @@ export class ShipmentsListComponent {
   shipments$ = this.afs.collection<Shipment>('shipments').valueChanges();
   routes = appRoutes;
 
-  constructor(private readonly afs: AngularFirestore) {
-  }
+  constructor(private readonly afs: AngularFirestore) {}
 }
