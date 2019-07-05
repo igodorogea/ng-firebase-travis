@@ -28,8 +28,16 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+p {
+  margin: 0 0 10px;
+}
+
 .remove-btn {
   &:hover {
     color: mat-color(mat-palette($mat-red), darker);
   }
+}
+
+.mat-form-field {
+  width: 100%;
 }

@@ -1,28 +1,26 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Order } from '../../shared/persistence/models/order';
+import { appRoutes } from '../../shared/routing/routes.config';
+import { DataService } from '../../shared/persistence/data.service';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Order } from '../../shared/models/order';
-import { appRoutes } from '../../shared/routes.config';
 
 @Component({
   selector: 'app-menu-create',
   templateUrl: './order-edit.component.html'
 })
 export class OrderEditComponent {
-  orderDoc = this.afs.collection('orders').doc<Order>(this.route.snapshot.params.id);
-  order$ = this.orderDoc.valueChanges();
+  order$ = this.dataSvc.getOrder(this.route.snapshot.params.id);
   routes = appRoutes;
 
   constructor(
     public location: Location,
-    private readonly afs: AngularFirestore,
-    private router: Router,
+    private dataSvc: DataService,
     private route: ActivatedRoute
   ) {}
 
   async update(order: Order) {
-    await this.orderDoc.update(order);
-    await this.router.navigate([this.routes.order.LIST]);
+    await this.dataSvc.saveOrder(order);
+    this.location.back();
   }
 }

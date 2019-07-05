@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Product } from '../../shared/models/product';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DataService } from '../../shared/persistence/data.service';
 
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html'
 })
 export class ProductCreateComponent {
-  productCol: AngularFirestoreCollection<Product> = this.afs.collection('products');
   productForm = this.fb.group({
     id: [''],
     name: ['', [Validators.required]],
@@ -18,7 +16,7 @@ export class ProductCreateComponent {
   });
 
   constructor(
-    private readonly afs: AngularFirestore,
+    private dataSvc: DataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -26,9 +24,7 @@ export class ProductCreateComponent {
 
   async create() {
     if (this.productForm.valid) {
-      const product = this.productForm.value;
-      product.id = this.afs.createId();
-      await this.productCol.doc(product.id).set(product);
+      await this.dataSvc.saveProduct(this.productForm.value);
       await this.router.navigate(['..'], { relativeTo: this.route });
     }
   }

@@ -7,8 +7,6 @@ import { OrderDetailComponent } from './detail/order-detail.component';
 import { OrderEditComponent } from './edit/order-edit.component';
 import { OrderFormComponent } from './shared/form/order-form.component';
 
-// TODO: create order line, order line in not an independent entity
-// adapt forms after shipment is implemented
 @NgModule({
   declarations: [
     OrdersListComponent,

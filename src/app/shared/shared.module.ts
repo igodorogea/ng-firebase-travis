@@ -1,24 +1,18 @@
 import { NgModule } from '@angular/core';
-import { MaterialModule } from './material.module';
+import { PresentationModule } from './presentation/presentation.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ContainerComponent } from './container/container.component';
-import { RemoveItemDialog } from './remove-item.dialog';
 import { RouterModule } from '@angular/router';
+import { PersistenceModule } from './persistence/persistence.module';
+import { LeiPipe } from './lei.pipe';
 
 @NgModule({
-  declarations: [
-    ContainerComponent,
-    RemoveItemDialog
-  ],
-  entryComponents: [RemoveItemDialog],
   exports: [
     ReactiveFormsModule,
-    MaterialModule,
+    PresentationModule,
+    PersistenceModule,
     RouterModule,
-    ContainerComponent,
+    LeiPipe,
   ],
-  imports: [
-    MaterialModule
-  ]
+  declarations: [LeiPipe],
 })
 export class SharedModule {}

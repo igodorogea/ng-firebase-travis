@@ -1,12 +1,6 @@
-<app-container size="medium">
-  <h2 class="mat-headline">Update {{shipmentForm.get('date').value | date}}</h2>
+<app-container size="medium" *ngIf="shipment">
+  <h2 class="mat-headline">Update {{shipment.crdate | date}}</h2>
   <form class="menu-form" [formGroup]="shipmentForm" (submit)="update()">
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Shipment date" formControlName="date">
-      <mat-error *ngIf="shipmentForm.get('date').invalid">Cmon, give dis shipment a date!</mat-error>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
     <mat-form-field>
       <textarea matInput placeholder="Shipment description" formControlName="description"></textarea>
     </mat-form-field>
@@ -16,4 +10,6 @@
       <a class="ml-2" mat-button [routerLink]="routes.shipment.LIST">Cancel</a>
     </div>
   </form>
+  <pre>{{shipmentForm.value | json}}</pre>
+  <pre>{{shipmentForm.status | json}}</pre>
 </app-container>

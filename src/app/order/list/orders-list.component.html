@@ -1,4 +1,4 @@
-<app-container size="medium" *ngIf="(products$ | async) as products">
+<app-container size="medium">
   <div class="row align-items-center mb-4">
     <div class="col">
       <h2 class="mat-headline mb-0">Orders list</h2>
@@ -12,7 +12,7 @@
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
         <a class="flex-grow-1" [routerLink]="[routes.order.DETAIL, order.id]">
-          {{getOrderTotal(order, products) | currency:'MDL':'symbol':'1.2-2'}}
+          {{order.total | lei}}
         </a>
         <a mat-icon-button color="primary" [routerLink]="[routes.order.EDIT, order.id]">
           <mat-icon>edit</mat-icon>

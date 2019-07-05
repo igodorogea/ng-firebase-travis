@@ -1,47 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from './user.model';
-import { map, switchMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AutoUnsubscribe } from '../shared/auto-unsubscribe';
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
-  isFetching$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  user$: Observable<User> = this.afAuth.user.pipe(
-    switchMap((user) => this.afAuth.idTokenResult.pipe(
-      map((idTokenResult) => {
-        this.isFetching$.next(false);
-        return user && idTokenResult ? { ...user, claims: idTokenResult.claims as any } : null;
-      })
-    ))
-  );
+export class AuthService extends AutoUnsubscribe {
+  isFetching = true;
+  user: User;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+    private readonly afAuth: AngularFireAuth,
+    private readonly afs: AngularFirestore,
     private router: Router
-  ) {}
+  ) {
+    super();
+    this.subscriptions.push(
+      combineLatest([
+        this.afAuth.user,
+        this.afAuth.idTokenResult
+      ]).subscribe(([user, idTokenResult]) => {
+        this.isFetching = false;
+        this.user = user && idTokenResult
+          ? { ...user, claims: idTokenResult.claims as any }
+          : null;
+      })
+    );
+  }
 
   async googleSignIn() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
-    if (credential.additionalUserInfo.isNewUser) {
-      this.updateUserData(credential.user);
-    }
+    await this.updateUserData(credential.user);
   }
 
   private updateUserData(user) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
     const data = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
     };
-    userRef.set(data, { merge: true });
+    return this.afs.doc(`users/${data.uid}`).set(data, { merge: true });
   }
 
   async signOut() {

@@ -2,14 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AutoUnsubscribe } from '../../../shared/auto-unsubscribe';
 import { Observable } from 'rxjs';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Order } from '../../../shared/models/order';
-import { Menu } from '../../../menu/shared/menu.interfaces';
+import { Order } from '../../../shared/persistence/models/order';
 import { MatDialog } from '@angular/material';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { Product } from '../../../shared/models/product';
-import { RemoveItemDialog } from '../../../shared/remove-item.dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../../shared/persistence/models/product';
+import { RemoveItemDialogComponent } from '../../../shared/presentation/remove-item-dialog.component';
+import { DataService } from '../../../shared/persistence/data.service';
 
 @Component({
   selector: 'app-order-form',
@@ -19,10 +17,10 @@ export class OrderFormComponent extends AutoUnsubscribe implements OnInit {
   @Input() order$: Observable<Order>;
   @Output() formSubmit = new EventEmitter();
   orderForm: FormGroup = this.buildForm();
-  products$ = this.afs.collection<Product>('products').valueChanges();
+  products$ = this.dataSvc.getProducts();
 
   constructor(
-    private readonly afs: AngularFirestore,
+    private dataSvc: DataService,
     private fb: FormBuilder,
     private dialog: MatDialog,
     private route: ActivatedRoute,
@@ -67,7 +65,7 @@ export class OrderFormComponent extends AutoUnsubscribe implements OnInit {
 
   removeOrderLine(ev: MouseEvent, i: number) {
     ev.stopPropagation();
-    this.dialog.open(RemoveItemDialog)
+    this.dialog.open(RemoveItemDialogComponent)
       .afterClosed()
       .subscribe(result => {
         if (result === true) {

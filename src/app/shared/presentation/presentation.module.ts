@@ -9,8 +9,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material';
+import { ContainerComponent } from './container.component';
+import { RemoveItemDialogComponent } from './remove-item-dialog.component';
 
 @NgModule({
+  declarations: [
+    ContainerComponent,
+    RemoveItemDialogComponent,
+  ],
+  entryComponents: [
+    RemoveItemDialogComponent,
+  ],
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+  ],
   exports: [
     LayoutModule,
     MatToolbarModule,
@@ -21,7 +34,7 @@ import { MatSelectModule } from '@angular/material';
     MatListModule,
     MatCardModule,
     MatExpansionModule,
-    MatDialogModule
+    ContainerComponent,
   ]
 })
-export class MaterialModule {}
+export class PresentationModule {}

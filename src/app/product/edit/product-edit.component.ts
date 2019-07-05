@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Product } from '../../shared/models/product';
 import { FormBuilder, Validators } from '@angular/forms';
-import { buildCrudRoutes } from '../../shared/routes.util';
-import { appRoutes } from '../../shared/routes.config';
+import { appRoutes } from '../../shared/routing/routes.config';
+import { DataService } from '../../shared/persistence/data.service';
 
 @Component({
   selector: 'app-menu-create',
   templateUrl: './product-edit.component.html'
 })
 export class ProductEditComponent {
-  product = this.afs.collection('products').doc<Product>(this.route.snapshot.params.id);
   productForm = this.fb.group({
     id: [''],
     name: ['', [Validators.required]],
@@ -21,18 +18,18 @@ export class ProductEditComponent {
   routes = appRoutes;
 
   constructor(
-    private readonly afs: AngularFirestore,
+    private dataSvc: DataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.product.valueChanges().subscribe(product => this.productForm.setValue(product));
+    this.dataSvc.getProduct(this.route.snapshot.params.id)
+      .subscribe(product => this.productForm.setValue(product));
   }
 
   async update() {
     if (this.productForm.valid) {
-      const product = this.productForm.value;
-      await this.product.update(product);
+      await this.dataSvc.saveProduct(this.productForm.value);
       await this.router.navigate([this.routes.product.LIST]);
     }
   }

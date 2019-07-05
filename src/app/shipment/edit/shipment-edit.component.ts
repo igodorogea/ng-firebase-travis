@@ -1,36 +1,43 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Shipment } from '../../shared/models/shipment';
-import { FormBuilder, Validators } from '@angular/forms';
-import { appRoutes } from '../../shared/routes.config';
+import { FormBuilder } from '@angular/forms';
+import { appRoutes } from '../../shared/routing/routes.config';
+import { DataService } from '../../shared/persistence/data.service';
+import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
+import { Shipment } from '../../shared/persistence/models/shipment';
 
 @Component({
   selector: 'app-shipment-create',
   templateUrl: './shipment-edit.component.html'
 })
-export class ShipmentEditComponent {
-  shipment = this.afs.collection('shipments').doc<Shipment>(this.route.snapshot.params.id);
+export class ShipmentEditComponent extends AutoUnsubscribe {
+  shipment: Shipment;
   shipmentForm = this.fb.group({
     id: [''],
-    date: ['', [Validators.required]],
     description: [''],
   });
   routes = appRoutes;
 
   constructor(
-    private readonly afs: AngularFirestore,
+    private dataSvc: DataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.shipment.valueChanges().subscribe(shipment => this.shipmentForm.setValue({ ...shipment, date: shipment.date.toDate() }));
+    super();
+    this.subscriptions.push(
+      this.dataSvc.getShipment(this.route.snapshot.params.id)
+        .subscribe(shipment => {
+          this.shipment = shipment;
+          const { id, description } = shipment;
+          this.shipmentForm.setValue({ id, description });
+        })
+    );
   }
 
   async update() {
     if (this.shipmentForm.valid) {
-      const shipment = this.shipmentForm.value;
-      await this.shipment.update(shipment);
+      await this.dataSvc.saveShipment(this.shipmentForm.value);
       await this.router.navigate([this.routes.shipment.LIST]);
     }
   }

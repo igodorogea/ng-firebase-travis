@@ -1,27 +1,41 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { User } from '../auth/user.model';
 import { MatSlideToggleChange } from '@angular/material';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { DataService } from '../shared/persistence/data.service';
+import { AutoUnsubscribe } from '../shared/auto-unsubscribe';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
-  users$ = this.afs.collection<User>('users').valueChanges();
-  admins$: Observable<string[]> = this.afs.collection<{ uid: string }>('admins').valueChanges().pipe(
-    map(admins => admins.map(admin => admin.uid))
-  );
+export class UsersComponent extends AutoUnsubscribe {
+  users$ = this.dataSvc.getUsers();
+  adminsIds: string[];
+  private disabledUsers: string[] = [];
 
-  constructor(private readonly afs: AngularFirestore, private readonly aff: AngularFireFunctions) {}
+  constructor(
+    private dataSvc: DataService,
+    private readonly aff: AngularFireFunctions
+  ) {
+    super();
+    this.subscriptions.push(
+      this.dataSvc.getAdminsUids().subscribe(ids => this.adminsIds = ids)
+    );
+  }
+
+  isAdmin(userId) {
+    return this.adminsIds.includes(userId);
+  }
+
+  isDisabled(userId: string) {
+    return this.disabledUsers.includes(userId);
+  }
 
   toggleAdminRole(event: MatSlideToggleChange, userId: string) {
-    console.log(event.checked, userId);
-    //   const callable = fns.httpsCallable('toggleAdminRole');
-    //   this.data$ = callable({ userId, admin: event.checked });
+    this.disabledUsers.push(userId);
+    this.aff.httpsCallable('toggleAdminRole')({ userId, isAdmin: event.checked })
+      .toPromise()
+      .finally(() => this.disabledUsers = this.disabledUsers.filter(uid => uid !== userId));
   }
 }

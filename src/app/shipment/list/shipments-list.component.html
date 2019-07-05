@@ -10,13 +10,13 @@
   <mat-nav-list>
     <ng-container *ngFor="let shipment of (shipments$ | async); first as isFirst">
       <mat-divider *ngIf="!isFirst"></mat-divider>
-      <mat-list-item>
-        <a class="flex-grow-1"
-          [routerLink]="[routes.shipment.DETAIL, shipment.id]">{{shipment.date.toDate() | date}}</a>
+      <a mat-list-item [routerLink]="[routes.shipment.DETAIL, shipment.id]">
+        <p matLine>{{shipment.crdate | date}}</p>
+        <p matLine>{{shipment.description}}</p>
         <a mat-icon-button color="primary" [routerLink]="[routes.shipment.EDIT, shipment.id]">
           <mat-icon>edit</mat-icon>
         </a>
-      </mat-list-item>
+      </a>
     </ng-container>
   </mat-nav-list>
 </app-container>

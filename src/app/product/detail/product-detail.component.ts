@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Product } from '../../shared/models/product';
-import { buildCrudRoutes } from '../../shared/routes.util';
-import { appRoutes } from '../../shared/routes.config';
+import { appRoutes } from '../../shared/routing/routes.config';
+import { DataService } from '../../shared/persistence/data.service';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html'
 })
 export class ProductDetailComponent {
-  product$ = this.afs.collection('products').doc<Product>(this.route.snapshot.params.id).valueChanges();
+  product$ = this.dataSvc.getProduct(this.route.snapshot.params.id);
   routes = appRoutes;
 
-  constructor(private readonly afs: AngularFirestore, private router: Router, private route: ActivatedRoute) {
-  }
+  constructor(
+    private dataSvc: DataService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 }

@@ -6,7 +6,7 @@
     <div class="col-auto text-right">
       <a mat-button [routerLink]="routes.order.LIST">Back to list</a>
       <a mat-raised-button color="primary" class="ml-2" [routerLink]="[routes.order.EDIT, order.id]">Edit</a>
-      <a mat-raised-button color="warn" class="ml-2" (click)="removeOrder()">Remove</a>
+      <a mat-raised-button color="warn" class="ml-2" (click)="removeOrder(order.id)">Remove</a>
     </div>
   </div>
   <mat-list>
@@ -15,13 +15,13 @@
       <mat-list-item>
         <div class="flex-grow-1">{{orderLine.productName}}</div>
         <div>{{orderLine.qty}}</div>
-        <div style="width: 100px; text-align:right;">{{orderLine.price | currency:'MDL':'symbol':'1.2-2'}}</div>
+        <div style="width: 100px; text-align:right;">{{orderLine.price | lei}}</div>
       </mat-list-item>
     </ng-container>
     <mat-divider></mat-divider>
     <mat-list-item>
       <div class="flex-grow-1"><b>Total:</b></div>
-      <div style="text-align:right;">{{getOrderTotal(order) | currency:'MDL':'symbol':'1.2-2'}}</div>
+      <div style="text-align:right;">{{getOrderTotal(order) | lei}}</div>
     </mat-list-item>
   </mat-list>
 </app-container>

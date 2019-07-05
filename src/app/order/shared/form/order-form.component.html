@@ -18,7 +18,7 @@
         </mat-form-field>
       </div>
       <div class="col-auto d-flex align-items-center justify-content-end" [style.width]="'150px'">
-        <div>{{getOrderLinePrice(i, products) | currency:'MDL':'symbol':'1.2-2'}}</div>
+        <div>{{getOrderLinePrice(i, products) | lei}}</div>
         <button type="button" class="remove-btn ml-2" mat-icon-button (click)="removeOrderLine($event, i)">
           <mat-icon>delete</mat-icon>
         </button>
@@ -28,7 +28,7 @@
       <button type="button" mat-button color="primary" (click)="addOrderLine()">Add product</button>
     </div>
     <div class="mt-3 mb-5">
-      <b>Total:</b> {{getOrderTotal(products) | currency:'MDL':'symbol':'1.2-2'}}
+      <b>Total:</b> {{getOrderTotal(products) | lei}}
     </div>
   </div>
   <ng-content></ng-content>

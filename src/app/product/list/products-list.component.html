@@ -13,7 +13,7 @@
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <mat-list-item>
         <a class="flex-grow-1" [routerLink]="[routes.product.DETAIL, product.id]">{{product.name}}</a>
-        <span>{{product.price | currency:'MDL':'symbol':'1.2-2'}}</span>
+        <span>{{product.price | lei}}</span>
         <a mat-icon-button color="primary" [routerLink]="[routes.product.EDIT, product.id]">
           <mat-icon>edit</mat-icon>
         </a>

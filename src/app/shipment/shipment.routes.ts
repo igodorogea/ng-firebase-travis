@@ -1,4 +1,4 @@
-import { CREATE, DETAIL, EDIT } from '../shared/routes.util';
+import { CREATE, DETAIL, EDIT } from '../shared/routing/routes.util';
 
 export const shipmentRoutes = path => ({
   LIST: path,

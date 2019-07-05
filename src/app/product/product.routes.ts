@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CREATE, DETAIL, EDIT, LIST } from '../shared/routes.util';
+import { CREATE, DETAIL, EDIT, LIST } from '../shared/routing/routes.util';
 import { ProductsListComponent } from './list/products-list.component';
 import { ProductCreateComponent } from './create/product-create.component';
 import { ProductDetailComponent } from './detail/product-detail.component';
