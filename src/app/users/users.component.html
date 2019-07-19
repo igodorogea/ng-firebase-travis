@@ -4,16 +4,18 @@
     <mat-list-item>
       <div class="flex-grow-1 text-right">Is admin</div>
     </mat-list-item>
-    <ng-container *ngFor="let user of users">
-      <mat-divider></mat-divider>
-      <mat-list-item>
-        <img matListAvatar [src]="user.photoURL" alt="">
-        <div matLine>{{user.displayName}}</div>
-        <mat-slide-toggle
-          [disabled]="isDisabled(user.uid)"
-          (change)="toggleAdminRole($event, user.uid)"
-          [checked]="isAdmin(user.uid)"></mat-slide-toggle>
-      </mat-list-item>
+    <ng-container *ngIf="(adminsIds$ | async) as adminsIds">
+      <ng-container *ngFor="let user of users">
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <img matListAvatar [src]="user.photoURL" alt="">
+          <div matLine>{{user.displayName}}</div>
+          <mat-slide-toggle
+            [disabled]="disabledUsers | contains:user.uid"
+            (change)="toggleAdminRole($event, user.uid)"
+            [checked]="adminsIds | contains:user.uid"></mat-slide-toggle>
+        </mat-list-item>
+      </ng-container>
     </ng-container>
   </mat-list>
 </app-container>

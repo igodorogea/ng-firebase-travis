@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PersistenceModule } from './persistence/persistence.module';
 import { LeiPipe } from './lei.pipe';
+import { MatListActionDirective } from './mat-list-action.directive';
 
 @NgModule({
   exports: [
@@ -12,7 +13,11 @@ import { LeiPipe } from './lei.pipe';
     PersistenceModule,
     RouterModule,
     LeiPipe,
+    MatListActionDirective,
   ],
-  declarations: [LeiPipe],
+  declarations: [
+    LeiPipe,
+    MatListActionDirective,
+  ],
 })
 export class SharedModule {}

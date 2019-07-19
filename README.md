@@ -28,19 +28,29 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Entities
 
+All entities extend form a generic entity
+
+**Entity**
+- id
+- crdate
+- tstamp
+- cruserId
+- hidden
+- deleted
+
 **Shipment**
- - start date
- - end date
  - description
+ - endDate
+ - archived
  
 **Order**
  + shipment
+ * orderLines[]
  - date
  - customer
  - total
 
-**OrderItem**
- + order
+**OrderLine**
  - product
  - qty
 

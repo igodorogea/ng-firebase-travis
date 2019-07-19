@@ -1,13 +1,8 @@
 <app-container size="medium">
   <h2 class="mat-headline">Create new shipment</h2>
-  <form class="shipment-form" [formGroup]="shipmentForm" (submit)="create()">
-    <mat-form-field>
-      <textarea matInput placeholder="Shipment description" formControlName="description"></textarea>
-    </mat-form-field>
-
-    <div class="d-flex align-items-center">
-      <button type="submit" mat-raised-button color="warn">Create</button>
-      <a class="ml-3" routerLink="../">Cancel</a>
-    </div>
-  </form>
+  <app-shipment-form
+    (formSubmit)="create($event)">
+    <!-- Projected content -->
+    <button type="submit" mat-raised-button color="primary">Create</button>
+  </app-shipment-form>
 </app-container>
