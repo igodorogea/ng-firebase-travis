@@ -1,12 +1,9 @@
 <app-container size="medium">
   <h2 class="mat-headline">Edit order</h2>
   <app-order-form
-    [order$]="order$"
+    [order]="(order$ | async)"
     (formSubmit)="update($event)">
     <!-- Projected content -->
-    <div>
-      <button type="submit" mat-raised-button color="primary">Update</button>
-      <button type="button" class="ml-3" mat-button (click)="location.back()">Cancel</button>
-    </div>
+    <button type="submit" mat-raised-button color="primary">Update</button>
   </app-order-form>
 </app-container>

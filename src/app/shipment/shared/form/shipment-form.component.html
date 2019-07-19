@@ -1,0 +1,15 @@
+<form class="shipment-form" [formGroup]="shipmentForm" (submit)="submit()">
+  <mat-form-field>
+    <textarea matInput placeholder="Shipment description" formControlName="description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Shipment end date" formControlName="endDate">
+    <mat-error *ngIf="shipmentForm.get('endDate').invalid">Cmon, give dis shipment an end date!</mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <div class="d-flex align-items-center mt-2">
+    <ng-content></ng-content>
+    <a mat-button class="ml-2" [routerLink]="routes.shipment.LIST">Cancel</a>
+  </div>
+</form>

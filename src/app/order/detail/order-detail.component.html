@@ -1,12 +1,25 @@
 <app-container size="medium" *ngIf="(order$ | async) as order">
-  <div class="row align-items-center mb-4">
+  <div class="row align-items-center mb-4 no-gutters">
     <div class="col">
       <h2 class="mat-headline mb-0">Order details</h2>
     </div>
     <div class="col-auto text-right">
-      <a mat-button [routerLink]="routes.order.LIST">Back to list</a>
-      <a mat-raised-button color="primary" class="ml-2" [routerLink]="[routes.order.EDIT, order.id]">Edit</a>
-      <a mat-raised-button color="warn" class="ml-2" (click)="removeOrder(order.id)">Remove</a>
+      <div class="d-md-none">
+        <a mat-mini-fab [routerLink]="routes.order.LIST">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+        <a mat-mini-fab color="primary" class="ml-2" [routerLink]="[routes.order.EDIT, order.id]">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <a mat-mini-fab color="warn" class="ml-2" (click)="removeOrder(order.id)">
+          <mat-icon>delete</mat-icon>
+        </a>
+      </div>
+      <div class="d-none d-md-inline-block">
+        <a mat-button [routerLink]="routes.order.LIST">Back to list</a>
+        <a mat-raised-button color="primary" class="ml-2" [routerLink]="[routes.order.EDIT, order.id]">Edit</a>
+        <a mat-raised-button color="warn" class="ml-2" (click)="removeOrder(order.id)">Remove</a>
+      </div>
     </div>
   </div>
   <mat-list>

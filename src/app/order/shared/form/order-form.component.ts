@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AutoUnsubscribe } from '../../../shared/auto-unsubscribe';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from '../../../shared/persistence/models/order';
@@ -8,13 +7,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/persistence/models/product';
 import { RemoveItemDialogComponent } from '../../../shared/presentation/remove-item-dialog.component';
 import { DataService } from '../../../shared/persistence/data.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-order-form',
   templateUrl: './order-form.component.html'
 })
-export class OrderFormComponent extends AutoUnsubscribe implements OnInit {
-  @Input() order$: Observable<Order>;
+export class OrderFormComponent implements OnChanges {
+  @Input() order: Order;
   @Output() formSubmit = new EventEmitter();
   orderForm: FormGroup = this.buildForm();
   products$ = this.dataSvc.getProducts();
@@ -24,39 +24,17 @@ export class OrderFormComponent extends AutoUnsubscribe implements OnInit {
     private fb: FormBuilder,
     private dialog: MatDialog,
     private route: ActivatedRoute,
-  ) {
-    super();
-  }
+    public location: Location,
+  ) {}
 
-  ngOnInit() {
-    if (this.order$) {
-      this.subscriptions.push(
-        this.order$.subscribe(order => this.patchForm(order))
-      );
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.order && this.order) {
+      this.patchForm(this.order);
     }
   }
 
   get orderLines(): FormArray {
     return this.orderForm.get('orderLines') as FormArray;
-  }
-
-  getOrderLinePrice(i: number, products: Product[]): number {
-    const productId = this.orderLines.value[i].productId;
-    const product = products.find(p => p.id === productId);
-    if (productId && product) {
-      return product.price * this.orderLines.value[i].qty;
-    }
-    return 0;
-  }
-
-  getOrderTotal(products: Product[]): number {
-    return this.orderLines.value.reduce((acc, { productId, qty }) => {
-      const product = products.find(p => p.id === productId);
-      if (productId && product) {
-        acc += product.price * qty;
-      }
-      return acc;
-    }, 0);
   }
 
   addOrderLine() {

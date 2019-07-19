@@ -1,16 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from './user.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AutoUnsubscribe } from '../shared/auto-unsubscribe';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends AutoUnsubscribe {
   isFetching = true;
   user: User;
+  user$: Observable<User> = combineLatest([
+    this.afAuth.user,
+    this.afAuth.idTokenResult
+  ]).pipe(
+    map(
+      ([user, idTokenResult]) => {
+        return user && idTokenResult
+          ? { ...user, claims: idTokenResult.claims as any }
+          : null;
+      }
+    )
+  );
 
   constructor(
     private readonly afAuth: AngularFireAuth,
@@ -19,14 +32,9 @@ export class AuthService extends AutoUnsubscribe {
   ) {
     super();
     this.subscriptions.push(
-      combineLatest([
-        this.afAuth.user,
-        this.afAuth.idTokenResult
-      ]).subscribe(([user, idTokenResult]) => {
+      this.user$.subscribe((user) => {
         this.isFetching = false;
-        this.user = user && idTokenResult
-          ? { ...user, claims: idTokenResult.claims as any }
-          : null;
+        this.user = user;
       })
     );
   }

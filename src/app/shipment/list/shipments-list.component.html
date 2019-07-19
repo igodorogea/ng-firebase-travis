@@ -13,7 +13,11 @@
       <a mat-list-item [routerLink]="[routes.shipment.DETAIL, shipment.id]">
         <p matLine>{{shipment.crdate | date}}</p>
         <p matLine>{{shipment.description}}</p>
-        <a mat-icon-button color="primary" [routerLink]="[routes.shipment.EDIT, shipment.id]">
+        <a
+          mat-icon-button
+          appMatListAction
+          color="primary"
+          [routerLink]="[routes.shipment.EDIT, shipment.id]">
           <mat-icon>edit</mat-icon>
         </a>
       </a>

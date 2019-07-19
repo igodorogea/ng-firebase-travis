@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from './models/product';
@@ -71,15 +71,19 @@ export class DataService {
     );
   }
 
-  getUserOrders() {
-    return combineLatest([
-      this.afs.collection<Order>(
-        'orders',
-        ref => this.authSvc.user.claims.admin ? ref : ref.where('userId', '==', this.authSvc.user.uid)
-      ).valueChanges(),
-      this.getProducts()
-    ]).pipe(
-      map(calculateOrderTotal)
+  getUserOrders(): Observable<Order[]> {
+    return this.authSvc.user$.pipe(
+      switchMap(user =>
+        combineLatest([
+          this.afs.collection<Order>(
+            'orders',
+            ref => user.claims.admin ? ref : ref.where('userId', '==', user.uid)
+          ).valueChanges(),
+          this.getProducts()
+        ]).pipe(
+          map(calculateOrderTotal)
+        )
+      )
     );
   }
 
@@ -113,6 +117,7 @@ export class DataService {
   }
 
   saveShipment(shipment) {
+    console.log(shipment);
     return this.saveDoc(shipment, 'shipments');
   }
 
@@ -129,10 +134,10 @@ export class DataService {
     const newFields: any = {};
     if (!doc.id) {
       newFields.id = this.afs.createId();
-      newFields.crdate = new Date().getTime();
+      newFields.crdate = new Date().toISOString();
       newFields.cruserId = this.authSvc.user.uid;
     } else {
-      newFields.tstamp = new Date().getTime();
+      newFields.tstamp = new Date().toISOString();
     }
     return {
       ...doc,

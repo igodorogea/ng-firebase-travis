@@ -4,7 +4,20 @@
     class="user-photo"
     alt=""
   />
-  <button mat-flat-button (click)="signOut()">Sign out</button>
+  <button
+    mat-button
+    (click)="signOut()"
+    class="d-md-none ml-n3"
+  >
+    <mat-icon class="">logout</mat-icon>
+  </button>
+  <button
+    mat-flat-button
+    (click)="signOut()"
+    class="d-none d-md-inline-block"
+  >
+    <span>Sign out</span>
+  </button>
 </ng-container>
 <ng-template #login>
   <ng-container *ngIf="!auth.isFetching">

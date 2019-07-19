@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="p-0">
   <div class="w-100">
     <app-container size="medium">
       <div class="d-flex align-items-center">
@@ -6,7 +6,7 @@
           <img src="assets/logo-8.png" class="mr-1" style="height: 44px; border-radius: 50%" alt="">
           Nuts
         </a>
-        <nav class="ml-3">
+        <nav class="ml-3 d-none d-md-block">
           <a mat-button routerLink="/shipment" routerLinkActive="active">
             Shipments
           </a>
@@ -22,6 +22,29 @@
         </nav>
         <div class="flex-grow-1"></div>
         <app-auth></app-auth>
+        <button
+          class="ml-2 d-md-none"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          #menuButton="matMenuTrigger"
+        >
+          <mat-icon *ngIf="!menuButton.menuOpen">menu</mat-icon>
+          <mat-icon *ngIf="menuButton.menuOpen">close</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <a mat-menu-item routerLink="/shipment" routerLinkActive="mat-menu-item-highlighted">
+            Shipments
+          </a>
+          <a mat-menu-item routerLink="/order" routerLinkActive="mat-menu-item-highlighted">
+            Orders
+          </a>
+          <a mat-menu-item routerLink="/product" routerLinkActive="mat-menu-item-highlighted">
+            Products
+          </a>
+          <a mat-menu-item routerLink="/users" routerLinkActive="mat-menu-item-highlighted">
+            Users
+          </a>
+        </mat-menu>
       </div>
     </app-container>
   </div>

@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSelectModule } from '@angular/material';
+import { MatMenuModule, MatSelectModule } from '@angular/material';
 import { ContainerComponent } from './container.component';
 import { RemoveItemDialogComponent } from './remove-item-dialog.component';
 
@@ -34,6 +34,7 @@ import { RemoveItemDialogComponent } from './remove-item-dialog.component';
     MatListModule,
     MatCardModule,
     MatExpansionModule,
+    MatMenuModule,
     ContainerComponent,
   ]
 })

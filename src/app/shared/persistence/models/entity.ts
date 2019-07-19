@@ -1,7 +1,7 @@
 export interface Entity {
   id: string;
-  crdate: number;
-  tstamp: number;
+  crdate: string;
+  tstamp: string;
   cruserId: string;
   deleted: boolean;
   hidden: boolean;
