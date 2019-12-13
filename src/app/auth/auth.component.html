@@ -1,13 +1,13 @@
 <ng-container *ngIf="auth.user as user; else login">
   <img
     [src]="user.photoURL"
-    class="user-photo"
+    class="user-photo mr-2"
     alt=""
   />
   <button
-    mat-button
+    mat-icon-button
     (click)="signOut()"
-    class="d-md-none ml-n3"
+    class="d-md-none"
   >
     <mat-icon class="">logout</mat-icon>
   </button>
