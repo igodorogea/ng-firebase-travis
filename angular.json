@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-firebase-travis"
+    }
+  },
+  "defaultProject": "ng-firebase-travis",
+  "cli": {
+    "analytics": "f5b69ca8-c9ec-4b69-80df-95269f6d6e8f"
+  }
 }

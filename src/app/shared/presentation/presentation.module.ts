@@ -8,16 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule, MatSelectModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { ContainerComponent } from './container.component';
 import { RemoveItemDialogComponent } from './remove-item-dialog.component';
 
 @NgModule({
   declarations: [
     ContainerComponent,
-    RemoveItemDialogComponent,
-  ],
-  entryComponents: [
     RemoveItemDialogComponent,
   ],
   imports: [

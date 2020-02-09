@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { Observable } from 'rxjs';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from '../../../shared/persistence/models/order';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../../shared/persistence/models/product';
 import { RemoveItemDialogComponent } from '../../../shared/presentation/remove-item-dialog.component';
 import { DataService } from '../../../shared/persistence/data.service';
 import { Location } from '@angular/common';
@@ -25,7 +23,8 @@ export class OrderFormComponent implements OnChanges {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     public location: Location,
-  ) {}
+  ) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.order && this.order) {

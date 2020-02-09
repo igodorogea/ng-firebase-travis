@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSlideToggleModule } from '@angular/material';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UsersComponent } from './users.component';
 import { SharedModule } from '../shared/shared.module';
 import { ContainsPipe } from './contains.pipe';

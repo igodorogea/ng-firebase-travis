@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Observable } from 'rxjs';
 import { DataService } from '../shared/persistence/data.service';
 
